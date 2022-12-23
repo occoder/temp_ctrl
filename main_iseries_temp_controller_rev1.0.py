@@ -6,9 +6,9 @@ import pyb
 start_pin = Pin('Y3', Pin.IN, Pin.PULL_UP) # PB8 monitors start button push event.
 stop_pin = Pin('X2', Pin.IN, Pin.PULL_UP) # PA1 monitors stop button push event.
 led_pin = Pin('X5', Pin.OUT_PP) # PA4 drives LED indicator.
-led_pin.low() 
+led_pin.low()
 uart = UART(2, 9600) # UART2 communcates to CSi8.
-uart.init(9600, bits=7, parity=1, stop=1) 
+uart.init(9600, bits=7, parity=1, stop=1)
 start_pressed = 0
 # stop_pressed = 0
 t1_set = 200
@@ -23,8 +23,8 @@ cmd_standby = '*D03' # Standby mode with output off
 cmd_dis_standby = '*E03'# Disable standby
 start_value = 0
 stop_value = 0
-print("stop_pin.value="+str(stop_pin.value()))
-print("start_pin.value="+str(start_pin.value()))
+print(f"stop_pin.value={str(stop_pin.value())}")
+print(f"start_pin.value={str(start_pin.value())}")
 
 def start_callback(line):
   
@@ -57,9 +57,9 @@ def stop_callback(line):
     
 stop_int = pyb.ExtInt(stop_pin, pyb.ExtInt.IRQ_FALLING, pyb.Pin.PULL_UP, stop_callback)
 
-while (1):
+while 1:
   #global pyb
-  print("one loop passed-----"+str(start_pressed))
+  print(f"one loop passed-----{str(start_pressed)}")
   sleep(1)
   if start_pressed == 1:
     uart.write(cmd_dis_standby+'\r') # Disable standby from last heating cycle
